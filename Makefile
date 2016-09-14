@@ -1,0 +1,4 @@
+#
+# Website
+#
+SHELL := /bin/bash
