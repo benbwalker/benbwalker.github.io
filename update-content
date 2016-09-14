@@ -16,8 +16,10 @@ CLONE=$(mktemp --directory --tmpdir="${TMPDIR}" "${FORMAT}")
 #
 make build
 git clone "file://${REPOSITORY}" "${CLONE}"
-cp -r "public" "${CLONE}"
+git -C "${CLONE}" checkout master
+rm -rf "${CLONE}"/*
+cp -r public/* "${CLONE}"
 
 git -C "${CLONE}" add --all
 git -C "${CLONE}" commit --message="Update content of the site"
-git pull "file://${CLONE}"
+git fetch "file://${CLONE}"
