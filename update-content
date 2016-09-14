@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+# Update the content of the website
+#
+REPOSITORY=$(pwd)
+TMPDIR="/tmp"
+FORMAT="website.XXXXXXX"
+
+#
+# Variables
+#
+CLONE=$(mktemp --directory --tmpdir="${TMPDIR}" "${FORMAT}")
+
+#
+# Build
+#
+make build
+git clone "file://${REPOSITORY}" "${CLONE}"
+cp -r "public" "${CLONE}"
+
+git -C "${CLONE}" add --all
+git -C "${CLONE}" commit --message="Update content of the site"
+git pull "file://${CLONE}"
