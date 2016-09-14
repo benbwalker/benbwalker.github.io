@@ -22,4 +22,5 @@ cp -r public/* "${CLONE}"
 
 git -C "${CLONE}" add --all
 git -C "${CLONE}" commit --message="Update content of the site"
-git fetch "file://${CLONE}"
+git checkout master
+git pull "file://${CLONE}"
